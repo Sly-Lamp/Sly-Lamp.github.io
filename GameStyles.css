@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    font: 1.4rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+    box-sizing: border-box;
+}
+
+.game {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 120vh;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
+    pointer-events: none;
+}
+  
+.gameContainer {
+    position: relative;
+    top: -10%;
+    max-width: 50%;
+    background-color: rgba(5, 49, 12, 0.822);
+    animation-name: box-glow;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px;
+    color: white;
+}
+  @keyframes box-glow {
+    0%   {box-shadow: 0 0 10px 2px;}
+    50%  {box-shadow: 0 0 7px 1px;}
+    100%   {box-shadow: 0 0 10px 2px;}
+}
+  
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+}
+  
+.btn {
+    background-color: hsl(130, 73%, 16%);
+    border: 1px solid hsl(128, 91%, 46%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+}
+  
+.btn:hover {
+    box-shadow: 0 0 10px 2px;
+}
+
+ul {
+  float: right;
+  list-style-type: none;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+ul li {
+  display: inline-block;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1px solid transparent;
+  transition: 0.6s ease;
+}
+
+ul li a:hover {
+  background-color: #fff;
+  color:rgba(14, 247, 14, 0.75);
+  box-shadow: 0 0 10px 2px;
+}
+
+.current a {
+  background-color: #fff;
+  color:rgba(14, 247, 14, 0.75);
+  box-shadow: 0 0 10px 2px;
+}
+
+.logo img{
+  float: left;
+  width: 275px;
+  height: auto;
+}
+
+.topbar {
+  max-width: 1500px;
+  margin: auto;
+}
+
+header {
+  height: 120vh;
+  background-size: auto;
+  background-position: center;
+  background-image: radial-gradient(rgba(0, 78, 0, 0.75), black 120%);
+}
