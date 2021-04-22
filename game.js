@@ -1,7 +1,6 @@
-const textElement = document.getElementById('text')
-const optionButtonsElement = document.getElementById('option-buttons')
+//WEB TECH COURSEWORK - KENNETH BROWN - 40090523
 
-let state = {}
+//Code Adapted from https://www.youtube.com/watch?v=R1S_NhKkvGA
 
 function startGame() { //Starts the game, sets state to empty, shows the first text node
   state = {}
@@ -10,9 +9,23 @@ function startGame() { //Starts the game, sets state to empty, shows the first t
 
 function showTextNode(textNodeIndex) { //Create the games narrative text
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
-  textElement.innerText = textNode.text
-  while (optionButtonsElement.firstChild) { //Only show the number of buttons needed at one time
-    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+  storyText.innerText = textNode.text
+  while (options.firstChild) { //Only show the number of buttons needed at one time
+    options.removeChild(options.firstChild)
+  }
+
+  function showOption(option) { //Show options on the screen
+    return option.requiredState == null || option.requiredState(state) 
+    //Certain options require a certain 'state' to be shown
+  }
+
+  function selectOption(option) { //Links the option buttons to the next text node.
+    const nextTextNodeId = option.nextText
+    if (nextTextNodeId <= 0) { //Restart game when text node value is below zero.
+      return startGame()
+    }
+    state = Object.assign(state, option.setState) //Set custom player 'state' options.
+    showTextNode(nextTextNodeId)
   }
 
   textNode.options.forEach(option => { //Create the buttons for the options
@@ -21,25 +34,15 @@ function showTextNode(textNodeIndex) { //Create the games narrative text
       button.innerText = option.text
       button.classList.add('btn')
       button.addEventListener('click', () => selectOption(option))
-      optionButtonsElement.appendChild(button)
+      options.appendChild(button)
     }
   })
 }
 
-function showOption(option) { //Show options on the screen
-  return option.requiredState == null || option.requiredState(state) 
-  //Certain options require a certain 'state' to be shown
-}
+let state = {}
 
-function selectOption(option) { //Links the option buttons to the next text node.
-  const nextTextNodeId = option.nextText
-  if (nextTextNodeId <= 0) { //Restart game when text node value is below zero.
-    return startGame()
-  }
-  state = Object.assign(state, option.setState) //Set custom player 'state' options.
-  showTextNode(nextTextNodeId)
-}
-
+const storyText = document.getElementById('text')
+const options = document.getElementById('options')
 const textNodes = [
   {
     id: 1,
